@@ -30,7 +30,7 @@ jobs:
       # Runs a fetch
       - name: HTTP GET DATA STATIONS
         run: |
-          data=$(curl -s https://data.economie.gouv.fr/explore/dataset/prix-carburants-fichier-instantane-test-ods-copie/download?format=json&amp;timezone=Europe/Berlin&amp;use_labels_for_header=false)
+          data=$(curl -s ${{ secrets.URI }})
           echo $data > data.json
           echo $data
         
@@ -38,7 +38,7 @@ jobs:
       - name: Commit and push result
         run: |
           git config --local user.email ${{ secrets.EMAIL }}
-          git config --local user.name "Aissam Ahbar"
+          git config --local user.name ${{ secrets.USERNAME }}
           git add data.json
-          git commit -m "Sync eco data.json"
+          git commit -m "Fetching data.json"
           git push https://${{ secrets.ECO_SECRET }}@github.com/aissam-ahbar/eco.git main
