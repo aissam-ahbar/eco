@@ -32,6 +32,7 @@ jobs:
         run: |
           data=$(curl -s ${{ secrets.URI }})
           echo $data > data.json
+          node index.js
           echo $data
         
       # Commit & Push
