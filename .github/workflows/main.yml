@@ -37,7 +37,7 @@ jobs:
       # Commit & Push
       - name: Commit and push result
         run: |
-          git config --local user.email "aissam.ahbar@gmail.com"
+          git config --local user.email ${{ secrets.EMAIL }}
           git config --local user.name "Aissam Ahbar"
           git add data.json
           git commit -m "Sync eco data.json"
