@@ -31,7 +31,7 @@ jobs:
       - name: HTTP GET DATA
         run: |
           data2=$(curl -s ${{ secrets.URI }})
-          echo $data1 > data2.json
+          echo $data2 > data2.json
           data1=$(curl -s ${{ secrets.URI2 }})
           echo $data1 > data1.json
           node index.js
