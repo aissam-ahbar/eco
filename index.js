@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 const fs = require('fs');
 
-let mapIdNames = {};
-let map = {};
-
 const CHUNK_SIZE = 10000000; // 10MB
 
-async function readStreamFile(filename) {
+async function readFileStream(filename) {
   const stream = fs.createReadStream(filename, {
     highWaterMark: CHUNK_SIZE,
   });
@@ -18,12 +15,12 @@ async function readStreamFile(filename) {
 }
 
 async function main() {
-  let res1 = await readStreamFile('./data1.json');
-  console.log("Found Data " + res1.length + " data !")
+  let res1 = await readFileStream('./data1.json');
+  console.log("Found Data " + JSON.parse(res1).length + " data !")
 
   //await loadNames(res1);
 
-  //let res2 = await readStreamFile('./data2.json');
+  //let res2 = await readFileStream('./data2.json');
   //console.log(res2)
   //await loadData(res2);
 }
