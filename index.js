@@ -43,7 +43,7 @@ function loadNames(json) {
   }
 };
 
-function loadData(jsonString) {
+function loadData(json) {
   console.log("Found Data " + JSON.parse(json).length + " data !")
   try {
     for (let item of JSON.parse(json)) {
