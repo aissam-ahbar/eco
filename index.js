@@ -45,7 +45,9 @@ const loadNames = function (jsonString) {
 const loadData = function (jsonString) {
   try {
     const items = JSON.parse(jsonString);
+    console.log(mapIdNames)
     for (let item of items) {
+      console.log("processing " + item.fields.id)
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
