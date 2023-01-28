@@ -22,10 +22,11 @@ async function main() {
   console.log("res1", res1)
   let res2 = await readStreamFile('./data2.json');
   console.log("res2", res2)
-  loadNames(res1);
-  console.log("loadnames", mapIdNames)
-  loadData(res2);
-  console.log("loaddata", map)
+  console.log("parse res2", JSON.parse(res2))
+  //loadNames(res1);
+  //console.log("loadnames", mapIdNames)
+  //loadData(res2);
+  //console.log("loaddata", map)
 }
 
 main();
