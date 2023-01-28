@@ -18,12 +18,12 @@ async function readStreamFile(filename) {
 }
 
 async function main() {
-  let res1 = await readStreamFile('./data1.json');
-  loadNames(res1);
+  //let res1 = await readStreamFile('./data1.json');
+  //loadNames(res1);
 
   let res2 = await readStreamFile('./data2.json');
   console.log(res2)
-  loadData(res2);
+  await loadData(res2);
 }
 
 main();
