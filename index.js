@@ -21,9 +21,9 @@ async function main() {
   let res1 = await readStreamFile('./data1.json');
   await loadNames(res1);
 
-  let res2 = await readStreamFile('./data2.json');
-  console.log(res2)
-  await loadData(res2);
+  //let res2 = await readStreamFile('./data2.json');
+  //console.log(res2)
+  //await loadData(res2);
 }
 
 main();
