@@ -15,14 +15,11 @@ async function readFileStream(filename) {
 }
 
 async function main() {
-  let res1 = await readFileStream('./data1.json');
-  console.log("Found Data " + JSON.parse(res1).length + " data !")
-
+  //let res1 = await readFileStream('./data1.json');
+  //console.log("Found Data " + JSON.parse(res1).length + " data !")
   //await loadNames(res1);
-
-  //let res2 = await readFileStream('./data2.json');
-  //console.log(res2)
-  //await loadData(res2);
+  let res2 = await readFileStream('./data2.json');
+  await loadData(res2);
 }
 
 main();
@@ -45,6 +42,7 @@ async function loadNames(json) {
 
 async function loadData(json) {
   console.log("Found Data " + JSON.parse(json).length + " data !")
+  let map = {};
   try {
     for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
