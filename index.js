@@ -19,7 +19,9 @@ async function readStreamFile(filename) {
 
 async function main() {
   let res1 = await readStreamFile('./data1.json');
-  await loadNames(res1);
+  console.log("Found Data " + res1.length + " data !")
+
+  //await loadNames(res1);
 
   //let res2 = await readStreamFile('./data2.json');
   //console.log(res2)
