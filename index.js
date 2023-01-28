@@ -29,8 +29,8 @@ async function main() {
 main();
 
 function loadNames(json) {
-  console.log(json)
-  console.log(json.length)
+  console.log(JSON.parse(json))
+  console.log(JSON.parse(json).length)
   try {
     const items = json;
     for (let item of items) {
