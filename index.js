@@ -19,20 +19,21 @@ async function readStreamFile(filename) {
 
 async function main() {
   let res1 = await readStreamFile('./data1.json');
-  await loadNames(res1);
+  loadNames(res1);
 
-  //let res2 = await readStreamFile('./data2.json');
+  let res2 = await readStreamFile('./data2.json');
   //console.log("res2", JSON.parse(res2).length)
   //loadData(res2);
 }
 
 main();
 
-async function loadNames(json) {
+function loadNames(json) {
+  console.log(json)
+  console.log(json.length)
   try {
     const items = json;
     for (let item of items) {
-      console.log(item.id)
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
           name: item.name,
@@ -40,7 +41,6 @@ async function loadNames(json) {
         };
       }
     }
-    console.log(mapIdNames)
   } catch (err) {
     console.log('Error parsing JSON string:', err);
   }
