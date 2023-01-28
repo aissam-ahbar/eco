@@ -23,14 +23,16 @@ async function main() {
   let res2 = await readStreamFile('./data2.json');
   console.log("res2", res2)
   loadNames(res1);
+  console.log("loadnames", mapIdNames)
   loadData(res2);
+  console.log("loaddata", map)
 }
 
 main();
 
-const loadNames = function (jsonString) {
+const loadNames = function (json) {
   try {
-    const items = JSON.parse(jsonString);
+    const items = json;
     for (let item of items) {
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
