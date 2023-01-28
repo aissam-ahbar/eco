@@ -29,11 +29,9 @@ async function main() {
 main();
 
 function loadNames(json) {
-  console.log(JSON.parse(json))
-  console.log(JSON.parse(json).length)
+  console.log("Found " + JSON.parse(json).length + " names !")
   try {
-    const items = json;
-    for (let item of items) {
+    for (let item of JSON.parse(json)) {
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
           name: item.name,
