@@ -32,6 +32,7 @@ async function loadNames(json) {
   try {
     const items = json;
     for (let item of items) {
+      console.log(item.id)
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
           name: item.name,

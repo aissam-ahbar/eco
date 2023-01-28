@@ -30,10 +30,10 @@ jobs:
       # Runs a fetch
       - name: HTTP GET DATA
         run: |
-          data2=$(curl -s ${{ secrets.URI }})
-          echo $data2 > data2.json
           data1=$(curl -s ${{ secrets.URI2 }})
           echo $data1 > data1.json
+          data2=$(curl -s ${{ secrets.URI }})
+          echo $data2 > data2.json
           node index.js
         
       # Commit & Push
