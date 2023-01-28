@@ -23,12 +23,12 @@ async function main() {
 
   let res2 = await readStreamFile('./data2.json');
   console.log(res2)
-  //loadData(res2);
+  loadData(res2);
 }
 
 main();
 
-function loadNames(json) {
+async function loadNames(json) {
   console.log("Found Names " + JSON.parse(json).length + " names !")
   try {
     for (let item of JSON.parse(json)) {
@@ -44,7 +44,7 @@ function loadNames(json) {
   }
 };
 
-function loadData(json) {
+async function loadData(json) {
   console.log("Found Data " + JSON.parse(JSON.stringify(json)).length + " data !")
   try {
     for (let item of JSON.parse(json)) {
