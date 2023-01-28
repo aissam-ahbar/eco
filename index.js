@@ -19,10 +19,9 @@ async function readStreamFile(filename) {
 
 async function main() {
   let res1 = await readStreamFile('./data1.json');
-  console.log("res1", res1)
   let res2 = await readStreamFile('./data2.json');
-  console.log("res2", res2)
-  console.log("parse res2", JSON.parse(res2))
+  console.log("res1", res1.length)
+  console.log("res2", res2.length)
   //loadNames(res1);
   //console.log("loadnames", mapIdNames)
   //loadData(res2);
