@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const fs = require('fs');
 
-let mapIdNames = {};
-let map = {};
+global.mapIdNames = {};
+global.map = {};
 
 const CHUNK_SIZE = 10000000; // 10MB
 
