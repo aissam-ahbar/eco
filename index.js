@@ -20,6 +20,7 @@ async function readStreamFile(filename) {
 async function main() {
   let res1 = await readStreamFile('./data1.json');
   let res2 = await readStreamFile('./data2.json');
+  console.log(res2)
   loadNames(res1);
   loadData(res2);
 }
