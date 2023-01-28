@@ -1,16 +1,49 @@
 #!/usr/bin/env node
 const fs = require('fs');
 
-let map;
-fs.readFile('./data.json', 'utf8', (err, jsonString) => {
+let mapIdNames = {};
+let map = {};
+fs.readFile('./data1.json', 'utf8', (err, jsonString1) => {
   if (err) {
-    console.log('File read failed:', err);
+    console.log('File1 read failed:', err);
     return;
   }
-  map = {};
+
+  fs.readFile('./data2.json', 'utf8', (err, jsonString2) => {
+    if (err) {
+      console.log('File2 read failed:', err);
+      return;
+    }
+    loadNames(jsonString2);
+    loadData(jsonString1);
+  });
+});
+
+const loadNames = function (jsonString) {
   try {
     const items = JSON.parse(jsonString);
     for (let item of items) {
+      if (item && item.id && item.name) {
+        mapIdNames[item.id] = {
+          name: item.name,
+          brand: item.brand,
+        };
+      }
+    }
+  } catch (err) {
+    console.log('Error parsing JSON string:', err);
+  }
+};
+
+const loadData = function (jsonString) {
+  try {
+    const items = JSON.parse(jsonString);
+    for (let item of items) {
+      console.log(mapIdNames);
+      if (mapIdNames[item.fields.id]) {
+        item.fields['name'] = mapIdNames[item.fields.id].name;
+        item.fields['brand'] = mapIdNames[item.fields.id].brand;
+      }
       if (!map[item.fields.ville.toLowerCase()]) {
         map[item.fields.ville.toLowerCase()] = [];
         map[item.fields.ville.toLowerCase()].push(item.fields);
@@ -31,4 +64,4 @@ fs.readFile('./data.json', 'utf8', (err, jsonString) => {
       }
     });
   }
-});
+};
