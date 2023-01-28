@@ -3,21 +3,28 @@ const fs = require('fs');
 
 let mapIdNames = {};
 let map = {};
-fs.readFile('./data1.json', 'utf8', (err, jsonString1) => {
-  if (err) {
-    console.log('File1 read failed:', err);
-    return;
-  }
 
-  fs.readFile('./data2.json', 'utf8', (err, jsonString2) => {
-    if (err) {
-      console.log('File2 read failed:', err);
-      return;
-    }
-    loadNames(jsonString2);
-    loadData(jsonString1);
+const CHUNK_SIZE = 10000000; // 10MB
+
+async function readStreamFile(filename) {
+  const stream = fs.createReadStream(filename, {
+    highWaterMark: CHUNK_SIZE,
   });
-});
+  let res = [];
+  for await (const data of stream) {
+    res.push(data.toString());
+  }
+  return res;
+}
+
+async function main() {
+  let res1 = await readStreamFile('./data1.json');
+  let res2 = await readStreamFile('./data2.json');
+  loadNames(res1);
+  loadData(res2);
+}
+
+main();
 
 const loadNames = function (jsonString) {
   try {
@@ -39,7 +46,6 @@ const loadData = function (jsonString) {
   try {
     const items = JSON.parse(jsonString);
     for (let item of items) {
-      console.log(mapIdNames);
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
