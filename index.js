@@ -44,7 +44,7 @@ function loadNames(json) {
 };
 
 function loadData(json) {
-  console.log("Found Data " + JSON.parse(json).length + " data !")
+  console.log("Found Data " + JSON.parse(JSON.stringify(json)).length + " data !")
   try {
     for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
