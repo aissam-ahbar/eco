@@ -2,6 +2,8 @@
 const fs = require('fs');
 
 const CHUNK_SIZE = 10000000; // 10MB
+let mapIdNames = {};
+let map = {};
 
 async function readFileStream(filename) {
   const stream = fs.createReadStream(filename, {
@@ -42,7 +44,6 @@ async function loadNames(json) {
 
 async function loadData(json) {
   console.log("Found Data " + JSON.parse(json).length + " data !")
-  let map = {};
   try {
     for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
