@@ -22,7 +22,8 @@ async function main() {
   loadNames(res1);
 
   let res2 = await readStreamFile('./data2.json');
-  loadData(res2);
+  console.log(res2)
+  //loadData(res2);
 }
 
 main();
