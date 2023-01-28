@@ -28,7 +28,7 @@ async function main() {
 main();
 
 function loadNames(json) {
-  console.log("Found " + JSON.parse(json).length + " names !")
+  console.log("Found Names " + JSON.parse(json).length + " names !")
   try {
     for (let item of JSON.parse(json)) {
       if (item && item.id && item.name) {
@@ -44,7 +44,7 @@ function loadNames(json) {
 };
 
 function loadData(jsonString) {
-  console.log("Found " + JSON.parse(json).length + " names !")
+  console.log("Found Data " + JSON.parse(json).length + " data !")
   try {
     for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
