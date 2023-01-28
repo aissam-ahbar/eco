@@ -22,8 +22,7 @@ async function main() {
   loadNames(res1);
 
   let res2 = await readStreamFile('./data2.json');
-  //console.log("res2", JSON.parse(res2).length)
-  //loadData(res2);
+  loadData(res2);
 }
 
 main();
@@ -45,9 +44,9 @@ function loadNames(json) {
 };
 
 function loadData(jsonString) {
+  console.log("Found " + JSON.parse(json).length + " names !")
   try {
-    const items = JSON.parse(jsonString);
-    for (let item of items) {
+    for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
