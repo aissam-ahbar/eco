@@ -31,14 +31,10 @@ jobs:
       - name: HTTP GET DATA
         run: |
           rm -rf data*
-          echo "Loading data1..."
-          $data1 = $(curl -s ${{ secrets.URI2 }})
-          echo "Loaded data1 OK"
+          data1=$(curl -s ${{ secrets.URI2 }})
           echo $data1 > data1.json
-          echo "Loading data2..."
-          $data2 = $(curl -s ${{ secrets.URI }})
+          data2=$(curl -s ${{ secrets.URI }})
           echo $data2 > data2.json
-          echo "Loaded data2 OK"
           node index.js
         
       # Commit & Push
