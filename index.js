@@ -46,7 +46,7 @@ async function loadNames(json) {
 async function loadData(json) {
   console.log("Loading data...")
   try {
-    for (let item of JSON.parse(json.toString())) {
+    for (let item of JSON.parse(json)) {
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
