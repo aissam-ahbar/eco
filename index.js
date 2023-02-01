@@ -27,9 +27,9 @@ async function main() {
 main();
 
 async function loadNames(json) {
-  console.log("Found Names " + JSON.parse(json).length + " names !")
+  console.log("Loading names...")
   try {
-    for (let item of JSON.parse(json)) {
+    for (let item of JSON.parse(json.toString())) {
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
           name: item.name,
@@ -37,15 +37,16 @@ async function loadNames(json) {
         };
       }
     }
+   console.log("Loaded names OK")
   } catch (err) {
     console.log('Error parsing JSON string:', err);
   }
 };
 
 async function loadData(json) {
-  console.log("Found Data " + JSON.parse(json).length + " data !")
+  console.log("Loading data...")
   try {
-    for (let item of JSON.parse(json)) {
+    for (let item of JSON.parse(json.toString())) {
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
@@ -57,6 +58,7 @@ async function loadData(json) {
         map[item.fields.ville.toLowerCase()].push(item.fields);
       }
     }
+   console.log("Loaded data OK")
   } catch (err) {
     console.log('Error parsing JSON string:', err);
   }
