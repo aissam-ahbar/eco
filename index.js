@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 const fs = require('fs');
 
-const CHUNK_SIZE = 10000000; // 10MB
 let mapIdNames = {};
 let map = {};
 
-async function readFileStream(filename) {
+const CHUNK_SIZE = 10000000; // 10MB
+
+async function readStreamFile(filename) {
   const stream = fs.createReadStream(filename, {
     highWaterMark: CHUNK_SIZE,
   });
@@ -16,40 +17,31 @@ async function readFileStream(filename) {
   return res;
 }
 
-async function main() {
-  //let res1 = await readFileStream('./data1.json');
-  //console.log("Found Data " + JSON.parse(res1).length + " data !")
-  //await loadNames(res1);
-  let res2 = await readFileStream('./data2.json');
-  await loadData(res2);
-}
-
-main();
-
-async function loadNames(json) {
-  console.log("Loading names...")
+const loadNames = function (jsonString) {
   try {
-    for (let item of JSON.parse(json.toString())) {
+    const items = JSON.parse(jsonString);
+    for (let item of items) {
       if (item && item.id && item.name) {
         mapIdNames[item.id] = {
           name: item.name,
           brand: item.brand,
+          shortage: item.shortage,
         };
       }
     }
-   console.log("Loaded names OK")
   } catch (err) {
     console.log('Error parsing JSON string:', err);
   }
 };
 
-async function loadData(json) {
-  console.log("Loading data...")
+const loadData = function (jsonString) {
   try {
-    for (let item of JSON.parse(json)) {
+    const items = JSON.parse(jsonString);
+    for (let item of items) {
       if (mapIdNames[item.fields.id]) {
         item.fields['name'] = mapIdNames[item.fields.id].name;
         item.fields['brand'] = mapIdNames[item.fields.id].brand;
+        item.fields['shortage'] = mapIdNames[item.fields.id].shortage;
       }
       if (!map[item.fields.ville.toLowerCase()]) {
         map[item.fields.ville.toLowerCase()] = [];
@@ -58,7 +50,6 @@ async function loadData(json) {
         map[item.fields.ville.toLowerCase()].push(item.fields);
       }
     }
-   console.log("Loaded data OK")
   } catch (err) {
     console.log('Error parsing JSON string:', err);
   }
@@ -73,3 +64,12 @@ async function loadData(json) {
     });
   }
 };
+
+async function main() {
+  let res1 = await readStreamFile('./data1.json');
+  loadNames(res1);
+  let res2 = await readStreamFile('./data2.json');
+  loadData(res2);
+}
+
+main();
