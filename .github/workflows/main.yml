@@ -28,13 +28,21 @@ jobs:
       - uses: actions/checkout@v3
         
       # Runs a fetch
-      - name: HTTP GET DATA
+      - name: HTTP GET DATA1
         run: |
           rm -rf data*
           data1=$(curl -s ${{ secrets.URI2 }})
           echo $data1 > data1.json
+          
+      # Runs a fetch
+      - name: HTTP GET DATA2
+        run: |
           data2=$(curl -s ${{ secrets.URI }})
           echo $data2 > data2.json
+          
+      # Runs a fetch
+      - name: COMPUTE
+        run: |
           node index.js
         
       # Commit & Push
