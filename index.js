@@ -34,6 +34,7 @@ async function loadNames(json) {
         mapIdNames[item.id] = {
           name: item.name,
           brand: item.brand,
+          shortage: item.shortage
         };
       }
     }
